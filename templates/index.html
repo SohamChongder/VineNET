@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VineNET</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+           
+        }
+
+        .container {
+            max-width: 30vw;
+            margin: 0em ;
+            /* background-color: #fff; */
+            padding: 1em;
+            /* border-radius: 8px; */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            margin-top:20vh;
+            margin-left: 1vw;
+            color: #0056b3;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 5vw;
+            /* color: #333; */
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #ffffff;
+            /* color: #fff; */
+            border: 0.5vh;
+            border-style: solid;
+            border-color: #0056b3;
+            padding: 10px 20px;
+            cursor: pointer;
+            /* border-radius: 5px; */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            color:#ffffff
+        }
+
+        .flashes {
+            margin-top: 20px;
+            text-align: center;
+            color: green;
+        }
+
+        /* .download-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .download-link:hover {
+            color: #0056b3;
+        } */
+        .image-viewer{
+            max-width: 50vw;
+            max-height:50vh;
+            margin-left: 40vw;
+            margin-top: -20vh;
+            ;
+        }
+
+        .image-viewer img{
+            position: absolute;
+
+            max-width: 50vw;
+            max-height:50vh;
+        }
+        .input-img{
+            z-index:1;
+        }
+        .output-img{
+            z-index:2;
+            opacity:50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VineNET</h1>
+        <form method='POST' enctype='multipart/form-data'>
+            {{ form.hidden_tag() }}
+            {{ form.file() }}
+            {{ form.submit() }}
+        </form>
+        <div class="flashes">
+            {% for message in get_flashed_messages() %}
+                {{ message }}
+            {% endfor %}
+        <!-- </div>
+        {% if filename %}
+            <a href="{{ url_for('download', filename=filename) }}" class="download-link">Download</a>
+        {% endif %} -->
+    </div>
+    <!-- Image Viewer -->
+    <div class="image-viewer">
+        <div class="input-img"><img src="{{ url_for('static', filename='output.png') }}" alt="Output Image"></div>
+        <div class="output-img"><img src="{{ url_for('static', filename='input.png') }}" alt="Input Image"></div>
+    </div>
+</body>
+</html>
